@@ -33,6 +33,7 @@ IMPORTANT COMANDS:
 
 TODO:
     - convert database to postgres from sqllite
+    - do not forget to configure ssl in nginx!
 
 TEST:
     

@@ -1,4 +1,3 @@
-version: "3.9"
 services:
 
   redis:
@@ -17,15 +16,25 @@ services:
 
   app:
     build: .
+    command: gunicorn --bind 0.0.0.0:8000 core.wsgi:application
     volumes:
       - .:/django
     ports:
       - 8000:8000
     image: app:django
     container_name: django_app
-    command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
 
   celery:
     restart: always
