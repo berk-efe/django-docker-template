@@ -9,8 +9,6 @@ services:
     command: gunicorn --bind 0.0.0.0:8000 core.wsgi:application
     volumes:
       - .:/django
-    ports:
-      - 8000:8000
     image: app:django
     container_name: django_app
     depends_on:
